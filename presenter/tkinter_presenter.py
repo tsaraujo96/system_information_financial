@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 
-from domain import NameStockError
 from presenter.components import first_tab, second_tab
 
 
@@ -15,18 +14,15 @@ class TkinterPresenter(Tk):
 
     def run(self):
 
-        try:
-            self._default_configs()
+        self._default_configs()
 
-            stock_frame = first_tab(self)
-            option_frame = second_tab(self)
+        stock_frame = first_tab(self)
+        option_frame = second_tab(self)
 
-            self.notebook_style.add(stock_frame, text="Ações")
-            self.notebook_style.add(option_frame, text="Opções")
-        except NameStockError:
-            print('e ai')
-        finally:
-            return self
+        self.notebook_style.add(stock_frame, text="Ações")
+        self.notebook_style.add(option_frame, text="Opções")
+
+        return self
 
     def _default_configs(self):
         self.title("SIF - System Information Financial")
