@@ -17,10 +17,10 @@ class TkinterPresenter(Tk):
         self._default_configs()
 
         stock_frame = first_tab(self)
-        option_frame = second_tab(self)
+        # option_frame = second_tab(self)
 
         self.notebook_style.add(stock_frame, text="Ações")
-        self.notebook_style.add(option_frame, text="Opções")
+        # self.notebook_style.add(option_frame, text="Opções")
 
         return self
 
@@ -28,6 +28,7 @@ class TkinterPresenter(Tk):
         self.title("SIF - System Information Financial")
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(0, 0)
+        self.iconbitmap("icon.ico")
 
         self.notebook_style = ttk.Notebook(self)
         self.notebook_style.place(x=0, y=0, width=self.width, height=self.height)
