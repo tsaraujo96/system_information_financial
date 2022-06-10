@@ -4,6 +4,7 @@ from tkinter import Entry
 from typing import List, Tuple, Dict
 from urllib.request import urlopen, Request
 
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup as Soup
 
@@ -30,7 +31,7 @@ class StockRepository:
         paper_in_yahoo = json_soup["quotes"][0]["symbol"]
         return paper_in_yahoo
 
-    def get_json_and_build_fields(self, ativo_objeto: str, list_of_date: List[Tuple[str, str]]) -> List[Dict]:
+    def get_json_and_build_fields(self, ativo_objeto: str, list_of_date: List[Tuple[str, str]]) -> pd.DataFrame:
 
         list_info = []
 
@@ -45,7 +46,8 @@ class StockRepository:
             info_dict = self._data_factory(r)
             list_info.append(info_dict)
 
-        return list_info
+        data_frame = self._build_table(list_info)
+        return data_frame
 
     def _data_factory(self, r):
 
@@ -66,3 +68,20 @@ class StockRepository:
         date = [d - timedelta(hours=3) for d in date]
         date = [d.strftime("%Y-%m-%d %H:%M:%S") for d in date]
         return date
+
+    @staticmethod
+    def _build_table(list_info) -> pd.DataFrame:
+        for info in list_info:
+            df_daytrade_min = pd.DataFrame(
+                {
+                    "Date": info.get("date"),
+                    "Open": info.get("open"),
+                    "Close": info.get("close"),
+                    "High": info.get("high"),
+                    "Low": info.get("low"),
+                    "Volume": info.get("volume"),
+                }
+            )
+        return df_daytrade_min
+
+
