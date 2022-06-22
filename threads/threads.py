@@ -10,11 +10,11 @@ class ThreadController:
         self.root.update()
         self.root.after(1000, self._refresh)
 
-    def start_process_stock(self, date_start, date_end, stock_button, get_info, var):
+    def start_process_stock(self, date_start, date_end, stock_button, get_info, var, combo_box):
 
         self._refresh()
         HandlerThread(
             target=TabOneUseCase().run,
-            args=(date_start, date_end, stock_button, get_info, var),
+            args=(date_start, date_end, stock_button, get_info, var, combo_box),
         ).start()
 

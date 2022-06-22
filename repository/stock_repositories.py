@@ -1,7 +1,8 @@
 import json
 from datetime import datetime, timedelta
 from tkinter import Entry
-from typing import List, Tuple, Dict
+from tkinter.ttk import Combobox
+from typing import List, Tuple
 from urllib.request import urlopen, Request
 
 import pandas as pd
@@ -9,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup as Soup
 
 from domain import NameStockError
+from utils import switch_level
 
 
 class StockRepository:
@@ -31,7 +33,7 @@ class StockRepository:
         paper_in_yahoo = json_soup["quotes"][0]["symbol"]
         return paper_in_yahoo
 
-    def get_json_and_build_fields(self, ativo_objeto: str, list_of_date: List[Tuple[str, str]]) -> pd.DataFrame:
+    def get_json_and_build_fields_with_date(self, ativo_objeto: str, list_of_date: List[Tuple[str, str]], combo_box: Combobox) -> pd.DataFrame:
 
         list_info = []
 
@@ -39,12 +41,28 @@ class StockRepository:
 
             url = (
                 f"https://query1.finance.yahoo.com/v8/finance/chart/{ativo_objeto}?&period1={tuple_date[0]}"
-                f"&period2={tuple_date[1]}&interval=1m&range=7d&includePrePost=true "
+                f"&period2={tuple_date[1]}&interval={switch_level(combo_box.get())}&includePrePost=true "
             )
             r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}).json()
 
             info_dict = self._data_factory(r)
             list_info.append(info_dict)
+
+        data_frame = self._build_table(list_info)
+        return data_frame
+
+    def get_json_and_build_fields(self, ativo_objeto: str, combo_box) -> pd.DataFrame:
+
+        list_info = []
+
+        url = (
+            f"https://query1.finance.yahoo.com/v8/finance/chart/{ativo_objeto}?"
+            f"&interval={switch_level(combo_box.get())[0]}&range={switch_level(combo_box.get())[1]}&includePrePost=true"
+        )
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}).json()
+
+        info_dict = self._data_factory(r)
+        list_info.append(info_dict)
 
         data_frame = self._build_table(list_info)
         return data_frame

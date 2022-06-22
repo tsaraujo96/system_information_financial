@@ -12,7 +12,7 @@ from utils import date_range
 
 
 class TabOneUseCase:
-    def run(self, date_start, date_end, stock, get_info, var):
+    def run(self, date_start, date_end, stock, get_info, var, combo_box):
 
         get_info["state"] = DISABLED
 
@@ -21,8 +21,11 @@ class TabOneUseCase:
 
         stock_name_fixed = StockRepository().get_all_papers(stock)
 
-        date_list = date_range(date_start.get_date(), date_end.get_date())
-        stock_data_frame = StockRepository().get_json_and_build_fields(stock_name_fixed, date_list)
+        if combo_box.get() not in ['Hora', 'Minuto']:
+            date_list = date_range(date_start.get_date(), date_end.get_date())
+            stock_data_frame = StockRepository().get_json_and_build_fields_with_date(stock_name_fixed, date_list, combo_box)
+        else:
+            stock_data_frame = StockRepository().get_json_and_build_fields(stock_name_fixed, combo_box)
 
         correct_name = self._fix_name_stock(stock_name_fixed)
         option_data_frame = OptionRepository().get_all_opcoes(correct_name)

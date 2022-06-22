@@ -32,7 +32,8 @@ def convert_datetime_to_timestamp(dates: List[datetime]) -> List[str]:
 def batch_dates(dates: List[str]) -> List[Tuple[str, str]]:
 
     start_list = 0
-    next_end_list = 6
+    # next_end_list = 6
+    next_end_list = len(dates) - 1
 
     list_date_batch = []
 
