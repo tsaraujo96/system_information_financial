@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 from tkinter import *
 from tkinter import ttk
 
-from presenter.components import first_tab, second_tab
+from presenter.components import first_tab
 
 
 class TkinterPresenter(Tk):
@@ -12,7 +14,7 @@ class TkinterPresenter(Tk):
         self.width = 380
         self.height = 150
 
-    def run(self):
+    def run(self) -> TkinterPresenter:
 
         self._default_configs()
 

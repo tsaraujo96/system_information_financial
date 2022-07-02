@@ -67,4 +67,3 @@ class OptionRepository:
     def _treating_dataframe(df: pd.DataFrame):
         df.dropna(how='any', axis=0, inplace=True)
         df.reset_index(drop=True, inplace=True)
-
