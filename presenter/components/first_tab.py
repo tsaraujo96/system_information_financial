@@ -38,9 +38,8 @@ def first_tab(root) -> Frame:
         stock_frame,
         text="Gerar relatório",
         command=lambda: ThreadController(root).start_process_stock(
-            date_start, date_end, stock_button, get_info, var, combo_box
+            date_start, date_end, stock_button, get_info, combo_box
         ),
-        state="disabled",
     )
 
     get_info.place(x=10, y=80)
