@@ -23,7 +23,7 @@ pip install -r /your_path/SIF_System_information_financial/requirements.txt
 OBS: De preferencia instale em um ambiente virtual separado para não ter conflitos de dependências.
 
 ## Forma de uso:
-- **Rodar direto no codigo**
+- **Rodar direto no terminal**
 
 ```sh
 python app.py
