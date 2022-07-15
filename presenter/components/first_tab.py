@@ -44,7 +44,10 @@ def first_tab(root) -> Frame:
 
     get_info.place(x=10, y=80)
 
+    fake_label = Label(stock_frame, fg='red')
+    fake_label.place(x=172, y=75)
+
     bind_date_entry(date_start, date_end, get_info, stock_button, var)
-    bind_combo_box(date_start, date_end, combo_box)
+    bind_combo_box(date_start, date_end, combo_box, fake_label)
 
     return stock_frame
