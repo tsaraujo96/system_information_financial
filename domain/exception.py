@@ -1,6 +1,6 @@
-class FillStockError(Exception):
+class NotHaveDataError(Exception):
     def __init__(self):
-        default_message = 'Preencha ao menos 4 letras do ativo'
+        default_message = 'Período ou Ativo sem dados'
         super().__init__(default_message)
 
 

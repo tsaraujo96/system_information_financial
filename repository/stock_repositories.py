@@ -9,7 +9,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup as Soup
 
-from domain import NameStockError
+from domain import NameStockError, NotHaveDataError
 from utils import switch_level
 
 
@@ -44,6 +44,9 @@ class StockRepository:
                 f"&period2={tuple_date[1]}&interval={switch_level(combo_box.get())}&includePrePost=true "
             )
             r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}).json()
+
+            if not r["chart"]["result"][0].get("timestamp", None):
+                raise NotHaveDataError()
 
             info_dict = self._data_factory(r)
             list_info.append(info_dict)
