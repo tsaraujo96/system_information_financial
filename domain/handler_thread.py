@@ -25,7 +25,7 @@ class HandlerThread(threading.Thread):
             self._real_run()
 
         except Exception as e:
-            showinfo(title="Pocesso", message=e, icon="question")
+            showinfo(title="Pocesso", message=str(e), icon="question")
             self._enable_all_button()
         else:
             showinfo(title="Processo", message="Processo concluido", icon="question")
