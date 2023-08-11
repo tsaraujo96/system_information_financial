@@ -8,7 +8,5 @@ def bind_date_entry(date_start, date_end, get_info, stock_button, var):
 
         f.bind(
             var_event,
-            lambda event: enable_button_info(
-                event, date_start, date_end, get_info, stock_button, var
-            ),
+            lambda event: enable_button_info(event, date_start, date_end, get_info, stock_button, var),
         )

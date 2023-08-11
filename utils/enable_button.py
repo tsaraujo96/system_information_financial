@@ -18,13 +18,13 @@ def enable_button_info(event, date_start, date_end, button, stock_button, var):
 
 def enable_button_calendar(event, date_start, date_end, combo_box, fake_label):
 
-    if combo_box.get() not in ['Hora', 'Minuto']:
+    if combo_box.get() not in ["Hora", "Minuto"]:
         fake_label.config(text="")
         date_start["state"] = NORMAL
         date_end["state"] = NORMAL
 
     else:
-        periodo = '7' if combo_box.get() == 'Minuto' else '200'
+        periodo = "7" if combo_box.get() == "Minuto" else "200"
         fake_label.config(text=f"Período dos últimos {periodo} dias")
         date_start["state"] = DISABLED
         date_end["state"] = DISABLED

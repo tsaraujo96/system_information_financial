@@ -33,7 +33,9 @@ class StockRepository:
         paper_in_yahoo = json_soup["quotes"][0]["symbol"]
         return paper_in_yahoo
 
-    def get_json_and_build_fields_with_date(self, ativo_objeto: str, list_of_date: List[Tuple[str, str]], combo_box: Combobox) -> pd.DataFrame:
+    def get_json_and_build_fields_with_date(
+        self, ativo_objeto: str, list_of_date: List[Tuple[str, str]], combo_box: Combobox
+    ) -> pd.DataFrame:
 
         list_info = []
 
@@ -104,5 +106,3 @@ class StockRepository:
                 }
             )
         return df_daytrade_min
-
-

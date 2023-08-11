@@ -52,6 +52,6 @@ def batch_dates(dates: List[str]) -> List[Tuple[str, str]]:
 
         list_date_batch.append((start_date, end_date))
 
-        del dates[0:next_end_list + 1]
+        del dates[0 : next_end_list + 1]
 
     return list_date_batch

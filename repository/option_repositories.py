@@ -3,11 +3,10 @@ import requests
 
 
 class OptionRepository:
-
     def get_all_opcoes(self, ativo_objeto) -> pd.DataFrame:
-        url = f'https://opcoes.net.br/listaopcoes/completa?&idAcao={ativo_objeto}&listarVencimentos=true&cotacoes=true'
+        url = f"https://opcoes.net.br/listaopcoes/completa?&idAcao={ativo_objeto}&listarVencimentos=true&cotacoes=true"
         r = requests.get(url).json()
-        vencimentos = [i['value'] for i in r['data']['vencimentos']]
+        vencimentos = [i["value"] for i in r["data"]["vencimentos"]]
 
         if vencimentos:
             df_completo = pd.concat([self._build_table(ativo_objeto, vencimento) for vencimento in vencimentos])
@@ -18,8 +17,10 @@ class OptionRepository:
         return df_completo
 
     def _build_table(self, ativo_objeto, vencimento) -> pd.DataFrame:
-        url = f"https://opcoes.net.br/listaopcoes/completa?idLista=" \
-              f"ML&idAcao={ativo_objeto}&listarVencimentos=false&cotacoes=true&vencimentos={vencimento}"
+        url = (
+            f"https://opcoes.net.br/listaopcoes/completa?idLista="
+            f"ML&idAcao={ativo_objeto}&listarVencimentos=false&cotacoes=true&vencimentos={vencimento}"
+        )
 
         r = requests.get(url).json()
         preco_acao = self._get_header(ativo_objeto)
@@ -65,5 +66,5 @@ class OptionRepository:
 
     @staticmethod
     def _treating_dataframe(df: pd.DataFrame):
-        df.dropna(how='any', axis=0, inplace=True)
+        df.dropna(how="any", axis=0, inplace=True)
         df.reset_index(drop=True, inplace=True)

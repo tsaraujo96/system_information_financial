@@ -34,5 +34,3 @@ class TkinterPresenter(Tk):
 
         self.notebook_style = ttk.Notebook(self)
         self.notebook_style.place(x=0, y=0, width=self.width, height=self.height)
-
-
