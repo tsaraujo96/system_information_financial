@@ -32,8 +32,11 @@ class HandlerThread(threading.Thread):
             self._enable_all_button()
 
     def _enable_all_button(self):
-        self.date_start.config(state="enable")
-        self.date_end.config(state="enable")
+
+        if self.combo_box.get() not in ["Hora", "Minuto"]:
+            self.date_start.config(state="enable")
+            self.date_end.config(state="enable")
+
         self.stock_button.config(state="normal")
         self.get_info.config(state="normal")
         self.combo_box.configure(state="enable")
