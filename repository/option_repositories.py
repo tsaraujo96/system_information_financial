@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pandas as pd
 import requests
 
@@ -37,6 +39,7 @@ class OptionRepository:
                 i[9],
                 i[10],
                 i[11],
+                datetime.strptime(vencimento, "%Y-%m-%d").date() - datetime.now().date(),
             ]
             for i in r["data"]["cotacoesOpcoes"]
         ]
@@ -54,6 +57,7 @@ class OptionRepository:
                 "vol. qt",
                 "vol. fin",
                 "data_de_fechamento",
+                "dias_faltantes",
             ],
         )
 
