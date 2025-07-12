@@ -27,6 +27,8 @@ class TabOneUseCase:
         correct_name = self._fix_name_stock(stock_name_fixed)
         option_data_frame = OptionRepository().get_all_opcoes(correct_name)
 
+        # self._calc_black_scholes()
+
         self._saves_in_excel(stock_data_frame, option_data_frame, correct_name)
 
     @staticmethod
@@ -45,4 +47,4 @@ class TabOneUseCase:
 
         with ExcelWriter(f"{correct_name}.xlsx") as writer:
             for df in list_dataframe:
-                df[0].to_excel(writer, df[1], index=False)
+                df[0].to_excel(excel_writer=writer, sheet_name=df[1], index=False)
